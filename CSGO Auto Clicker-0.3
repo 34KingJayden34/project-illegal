@@ -1,0 +1,58 @@
+// ==UserScript==
+// @name         CSGO Auto Clicker
+// @namespace    eek
+// @version      0.3
+// @description  Press "s" to set clicks per millisecond and start. Press "s" again to stop.
+// @author       King Jayden
+// @match        https://kingofkfcjamal.github.io/CaseClicker/*
+// @grant        none
+// @license      all rights reserved
+// @downloadURL https://update.greasyfork.org/scripts/579268/CSGO%20Auto%20Clicker.user.js
+// @updateURL https://update.greasyfork.org/scripts/579268/CSGO%20Auto%20Clicker.meta.js
+// ==/UserScript==
+ 
+(function() {
+    'use strict';
+ 
+    let myInterval = null;
+ 
+    window.addEventListener('keydown', function(event) {
+        // Ignore if user is typing in a text field
+        const targetTag = event.target.tagName.toLowerCase();
+        if (targetTag === 'input' || targetTag === 'textarea' || event.target.isContentEditable) {
+            return;
+        }
+
+        // Toggle with 's' key
+        if (event.key.toLowerCase() === 's') { 
+            if (!myInterval) {
+                // Ask the user for the number of clicks per millisecond
+                const userInput = prompt("How many clicks per millisecond?", "5");
+                const clicksPerMs = parseInt(userInput, 10);
+
+                // Validate the input is a valid number greater than 0
+                if (isNaN(clicksPerMs) || clicksPerMs <= 0) {
+                    console.log("Invalid number entered. Autoclicker NOT started.");
+                    return;
+                }
+
+                // Start the interval running every 1ms
+                myInterval = setInterval(function() {
+                    const button = document.getElementById("acceptButton");
+                    if (button) {
+                        // Loop to click the button multiple times in this single millisecond
+                        for (let i = 0; i < clicksPerMs; i++) {
+                            button.click();
+                        }
+                    }
+                }, 1); 
+                console.log(`Autoclicker STARTED at ${clicksPerMs} clicks/ms`);
+            } else {
+                // Stop the clicker
+                clearInterval(myInterval);
+                myInterval = null;
+                console.log("Autoclicker STOPPED");
+            }
+        }
+    });
+})();
