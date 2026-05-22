@@ -9,6 +9,6 @@ Step 3. Press F12 on your keyboard (ctrl+shift+i) to open the developer tools co
 Step 4. Paste the script into console and press enter (if this doesnt work try typing "allow pasting" and try step 4 again)
 (((Note for step 4, after pressing enter make sure that you see the console respond with "undefined" this means you did it right)))
                                                        
-Step 5. Press "s" on your keyboard to turn the auto clicker on and off
+Step 5. Press "s" on your keyboard and enter in the amount of clicks per ms to turn the auto clicker on and press "s" again to turn the auto clicker off
 
 Step 6. Enjoy :)
